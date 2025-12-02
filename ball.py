@@ -22,9 +22,21 @@ class Ball:
     def get_bb(self):
         return self.x - 10, self.y - 10, self.x + 10, self.y + 10
 
-    def handle_collision(self, group, other):
-        match group:
-            case 'boy:ball':
-                game_world.remove_object(self)
-            case 'zombie:ball':
-                game_world.remove_object(self)
+    def create_ball():
+        ball = Ball()
+        game_world.add_object(ball, 1)
+        return ball
+    create_ball = staticmethod(create_ball)
+    def clear_ball(ball):
+        game_world.remove_object(ball)
+    clear_ball = staticmethod(clear_ball)
+    def move_to(x, y):
+        for ball in game_world.objects_at_layer(1):
+            ball.x = x
+            ball.y = y
+    move_to = staticmethod(move_to)
+    def clear_all():
+        for ball in game_world.objects_at_layer(1):
+            game_world.remove_object(ball)
+    clear_all = staticmethod(clear_all)
+    
